@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-import RegisterForm from "./pages/RegisterForm";
+import RegisterPage from "./pages/RegisterPage";
+import UsersPage from "./pages/UsersPage";
 import MainLayout from "./components/Layout/MainLayout";
 import CatalogPage from "./pages/CatalogPage";
 import TourDetailPage from "./pages/TourDetailPage";
 import AboutPage from "./pages/AboutPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import CartPage from "./pages/CartPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
 
 import HeroSection from "./components/Hero/HeroSection";
 import StatCard from "./components/Analytics/StatCard";
@@ -59,10 +61,17 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
+          <Route path="cart" element={<CartPage />} />
           <Route index element={<Home />} />
           <Route path="catalog" element={<CatalogPage />} />
           <Route path="tour/:id" element={<TourDetailPage />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path="users" element={<UsersPage />} />
+          <Route path="users/:id" element={<UserDetailsPage />} />
+
+          {/* Вот сюда нужно добавить строчку для регистрации: */}
+          <Route path="register" element={<RegisterPage />} />
+
           <Route
             path="profile"
             element={

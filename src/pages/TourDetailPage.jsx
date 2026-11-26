@@ -1,86 +1,16 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-
-// Единый массив туров для детальной страницы
-const initialTours = [
-  {
-    id: 1,
-    title: "Восхождение на Кольсай и Кайынды",
-    category: "Горы & Треккинг",
-    price: 120,
-    rating: 4.9,
-    description:
-      "Невероятный треккинг по высокогорным озерам Тянь-Шаня с ночевкой в уютном глэмпинге и прогулкой на лодке.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800",
-  },
-  {
-    id: 2,
-    title: "Реликтовые леса и ущелья Алматы",
-    category: "Горы & Треккинг",
-    price: 85,
-    rating: 4.7,
-    description:
-      "Прогулка по хвойным лесам, чистейший горный воздух, освежающие водопады и авторский обед на природе.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800",
-  },
-  {
-    id: 3,
-    title: "Тропический Бали & Острова",
-    category: "Пляжи & Острова",
-    price: 890,
-    rating: 5.0,
-    description:
-      "Уединенные эко-респубики, рисовые террасы Убуда, медитации на рассвете и закаты на берегу океана.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800",
-  },
-  {
-    id: 4,
-    title: "Гастро-тур по уютной Грузии",
-    category: "Гастро-туры",
-    price: 450,
-    rating: 4.8,
-    description:
-      "Дегустация органика-вин в Кахетии, мастер-классы по приготовлению хинкали и древняя архитектура.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
-  },
-  {
-    id: 5,
-    title: "Закаты Чарынского Каньона",
-    category: "Горы & Треккинг",
-    price: 95,
-    rating: 4.9,
-    description:
-      "Путешествие в Долину Замков, ночное наблюдение за звездами и пикник на берегу реки Чарын.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800",
-  },
-  {
-    id: 6,
-    title: "Фьорды и скалы Норвегии",
-    category: "Горы & Треккинг",
-    price: 1100,
-    rating: 5.0,
-    description:
-      "Походы вдоль живописных фьордов, ночевки в скандинавских домиках и круиз по северным водам.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-  },
-];
+import { allTours } from "../data/tours";
 
 function TourDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { favorites, toggleFavorite } = useCart();
 
-
   const [isBooked, setIsBooked] = useState(false);
 
-  const tour = initialTours.find((t) => t.id === Number(id));
+  const tour = allTours.find((t) => t.id === Number(id));
 
   if (!tour) {
     return (
@@ -100,7 +30,7 @@ function TourDetailPage() {
     setIsBooked(true);
     setTimeout(() => {
       alert(`🎉 Поздравляем! Тур "${tour.title}" успешно забронирован!`);
-      navigate("/profile"); 
+      navigate("/profile");
     }, 300);
   };
 

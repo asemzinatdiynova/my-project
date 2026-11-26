@@ -6,7 +6,7 @@ import { useCart } from "../../context/CartContext";
 
 function MainLayout() {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { favoritesCount } = useCart();
+  const { favoritesCount, cartCount } = useCart();
 
   const getLinkStyle = ({ isActive }) => ({
     color: isActive
@@ -104,6 +104,21 @@ function MainLayout() {
             >
               ❤️ {favoritesCount}
             </div>
+
+            <NavLink
+              to="/cart"
+              style={{
+                backgroundColor: isDarkMode ? "#374151" : "#eaf2e8",
+                padding: "6px 14px",
+                borderRadius: "20px",
+                fontSize: "13px",
+                color: isDarkMode ? "#86efac" : "#2d5a27",
+                fontWeight: "600",
+                textDecoration: "none",
+              }}
+            >
+              🛒 {cartCount}
+            </NavLink>
 
             <UserProfile />
 

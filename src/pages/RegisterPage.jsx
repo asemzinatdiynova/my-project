@@ -1,37 +1,30 @@
 import React, { useState } from "react";
 
 function RegisterForm() {
-  // 1. Состояния для всех полей формы
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
   const [gender, setGender] = useState("");
-  const [skills, setSkills] = useState([]); // Массив для выбранных чекбоксов
+  const [skills, setSkills] = useState([]); 
   const [about, setAbout] = useState("");
 
-  // 2. Состояние для ошибок и статуса отправки
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Обработчик чекбоксов (так как их может быть несколько)
   const handleSkillChange = (e) => {
     const value = e.target.value;
     if (skills.includes(value)) {
-      // Убираем, если уже был выбран
       setSkills(skills.filter((skill) => skill !== value));
     } else {
-      // Добавляем новый навык
       setSkills([...skills, value]);
     }
-    // Очищаем ошибку навыков при изменении
     if (errors.skills) {
       setErrors({ ...errors, skills: "" });
     }
   };
 
-  // 3. Валидация и отправка формы
   const handleSubmit = (event) => {
     event.preventDefault();
     let newErrors = {};
@@ -48,7 +41,6 @@ function RegisterForm() {
 
     setErrors(newErrors);
 
-    // Если ошибок нет — считаем форму успешной
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitted(true);
     } else {
@@ -56,7 +48,6 @@ function RegisterForm() {
     }
   };
 
-  // 4. Функция полного сброса формы (handleReset)
   const handleReset = () => {
     setName("");
     setEmail("");
@@ -223,19 +214,28 @@ function RegisterForm() {
 
         {/* Skills (Checkboxes) */}
         <div>
-          <label>Навыки:</label>
-          <div style={{ display: "flex", gap: "15px", marginTop: "5px" }}>
-            {["HTML", "CSS", "JavaScript", "React"].map((skill) => (
-              <label key={skill}>
-                <input
-                  type="checkbox"
-                  value={skill}
-                  checked={skills.includes(skill)}
-                  onChange={handleSkillChange}
-                />{" "}
-                {skill}
-              </label>
-            ))}
+          <label>Интересы в путешествиях:</label>
+          <div
+            style={{
+              display: "flex",
+              gap: "15px",
+              marginTop: "5px",
+              flexWrap: "wrap",
+            }}
+          >
+            {["Горные походы", "Пляжный отдых", "Экскурсии", "Кемпинг"].map(
+              (skill) => (
+                <label key={skill}>
+                  <input
+                    type="checkbox"
+                    value={skill}
+                    checked={skills.includes(skill)}
+                    onChange={handleSkillChange}
+                  />{" "}
+                  {skill}
+                </label>
+              ),
+            )}
           </div>
           {errors.skills && (
             <span style={{ color: "red", fontSize: "14px" }}>

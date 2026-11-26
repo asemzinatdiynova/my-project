@@ -66,3 +66,19 @@ export const initialTours = [
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
   },
 ];
+
+const extraTours = Array.from({ length: 994 }, (_, index) => {
+  const template = initialTours[index % initialTours.length];
+  const id = index + 7;
+
+  return {
+    ...template,
+    id,
+    title: `${template.title} — маршрут №${id}`,
+    price: template.price + (index % 20) * 5,
+    rating: Number((4 + (index % 10) / 10).toFixed(1)),
+    description: `Авторский маршрут №${id}. ${template.description}`,
+  };
+});
+
+export const allTours = [...initialTours, ...extraTours];
